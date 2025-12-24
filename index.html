@@ -260,7 +260,7 @@
         <div class="header">
             <div class="header-content">
                 <h1>Toshif Patil</h1>
-                <p>Associate Consultent</p>
+                <p>Associate Consultant</p>
                 <div class="company">
                     <img src="https://stellium.com/wp-content/uploads/2025/01/Artboard-1-1.png" width="30%" alt=""
                         srcset="">
@@ -373,19 +373,19 @@ document.getElementById('contactBtn').addEventListener('click', () => {
     const vCard = `
 BEGIN:VCARD
 VERSION:3.0
-N:Johnson;Kevin
-FN:Kevin Johnson
-ORG:Cool Co.
-TITLE:Marketing Manager
-TEL;TYPE=WORK:+911234567890
-EMAIL:kevin@coolco.com
+N:Patil;Toshif
+FN:Toshif Patil
+ORG:Stellium Inc.
+TITLE:Associate Consultant
+TEL;TYPE=WORK:+919172479257
+EMAIL:toshifpatil401@gmail.com
 END:VCARD
 `.trim();
 
     const blob = new Blob([vCard], { type: 'text/vcard' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = 'Kevin_Johnson.vcf';
+    link.download = 'toshif.vcf';
     link.click();
 });
 </script>
