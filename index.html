@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Profile</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #111, #000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container */
+        .profile-container {
+            width: 100%;
+            max-width: 390px;
+            height: 100vh;
+            background: #0b0b0b;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Header Image */
+        .header {
+            height: 58%;
+            background: url('./toshif.png') center/cover no-repeat;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.95));
+        }
+
+        /* Header Text */
+        .header-content {
+            position: absolute;
+            bottom: 120px;
+            left: 20px;
+            z-index: 2;
+        }
+
+        .header-content h1 {
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .header-content p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .company {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .company span {
+            background: #f5c400;
+            color: #000;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+                inset -2px -2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Icon Row */
+        .icon-row {
+            position: absolute;
+            bottom: 60px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            z-index: 2;
+        }
+
+        /* 3D Button Base */
+        .icon-btn,
+        .bottom-btn,
+        .add-contact {
+            position: relative;
+            transition: all 0.25s ease;
+            transform-style: preserve-3d;
+        }
+
+        /* Circular Buttons */
+        .icon-btn,
+        .bottom-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            box-shadow:
+                0 6px 14px rgba(0, 0, 0, 0.45),
+                inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+                inset -2px -2px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Add Contact Button */
+        .add-contact {
+            background: linear-gradient(145deg, #ffffff, #dddddd);
+            color: #000;
+            padding: 10px 18px;
+            border-radius: 22px;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow:
+                0 8px 16px rgba(0, 0, 0, 0.5),
+                inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+                inset -2px -2px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Hover Float */
+        .icon-btn:hover,
+        .bottom-btn:hover,
+        .add-contact:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Press Effect */
+        .icon-btn:active,
+        .bottom-btn:active,
+        .add-contact:active {
+            transform: translateY(2px) scale(0.96);
+            box-shadow:
+                0 3px 6px rgba(0, 0, 0, 0.6),
+                inset 3px 3px 6px rgba(0, 0, 0, 0.35);
+        }
+
+        /* About Card */
+        .about {
+            position: absolute;
+            bottom: 140px;
+            left: 15px;
+            right: 15px;
+            background: rgba(20, 20, 20, 0.85);
+            border-radius: 18px;
+            padding: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow:
+                0 14px 28px rgba(0, 0, 0, 0.6),
+                inset 1px 1px 1px rgba(255, 255, 255, 0.08);
+        }
+
+        .about h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .about p {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        /* Bottom Bar */
+        .bottom-bar {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 22px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow:
+                0 12px 24px rgba(0, 0, 0, 0.65),
+                inset 1px 1px 1px rgba(255, 255, 255, 0.08);
+        }
+
+        /* Headline Below Icons (Inside Image) */
+        .headline {
+            position: absolute;
+            bottom: 18px;
+            left: 20px;
+            right: 20px;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .headline h1 {
+            font-size: 12.5px;
+            font-weight: 400;
+            line-height: 1.45;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
+        }
+        /* QR Modal */
+.qr-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.qr-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+}
+
+.qr-box p {
+    margin-top: 10px;
+    color: #000;
+    font-size: 13px;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="profile-container">
+
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>Toshif Patil</h1>
+                <p>Associate Consultent</p>
+                <div class="company">
+                    <img src="https://stellium.com/wp-content/uploads/2025/01/Artboard-1-1.png" width="30%" alt=""
+                        srcset="">
+                </div>
+            </div>
+
+            <div class="icon-row">
+                <div class="icon-btn"><a href="tel:+919172479257"><i style="color: #000;" class="fa-solid fa-phone"></i></a></div>
+                <div class="icon-btn"><a href="mailto:toshifpatil401@gmail.com?subject=Contact%20from%20Digital%20Profile&body=Hi%20there,%0A%0AI%20would%20like%20to%20connect%20with%20you."><i style="color: rgb(4, 4, 60);" class="fa-solid fa-envelope"></i></a></div>
+                <div class="icon-btn"><a href="https://github.com/toshif1234"><i style="color: #000;" class="fa-brands fa-github"></i></a></div>
+                <div class="icon-btn"><a href="www.linkedin.com/in/toshifhusenpatil"><i style="color: rgba(0, 0, 255, 0.708);" class="fa-brands fa-linkedin"></i></a></div>
+            </div>
+            <div class="headline">
+                <h1>
+                    Digital Supply Chain | SAP BTP | SaaS, Product & AI Developer |
+                    Innovator | Continuous Learner
+                </h1>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="about">
+            <h3>About Me</h3>
+            <p>
+                Hi, I am Toshif, I specialize in building digital supply chain and SaaS solutions on SAP BTP, combining cloud-native architectures with AI-driven innovation. Passionate about simplifying complex enterprise systems, I continuously learn and apply emerging technologies to deliver scalable, real-world impact.
+            </p>
+        </div>
+
+
+        <!-- Bottom Bar -->
+        <div class="bottom-bar">
+            <div class="bottom-btn" id="qrBtn">
+                <i class="fa-solid fa-qrcode"></i>
+            </div>
+
+            <div class="bottom-btn" id="shareBtn">
+                <i class="fa-solid fa-share-nodes"></i>
+            </div>
+
+            <div class="add-contact" id="contactBtn">
+                Add to Contact <i class="fa-solid fa-plus"></i>
+            </div>
+        </div>
+
+        <!-- QR Modal -->
+        <div id="qrModal" class="qr-modal">
+            <div class="qr-box">
+                <canvas id="qrCanvas"></canvas>
+                <p>Scan to view profile</p>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        document.querySelectorAll('.icon-btn, .bottom-btn, .add-contact')
+            .forEach(btn => {
+                btn.addEventListener('click', () => {
+                    btn.animate(
+                        [
+                            { transform: 'scale(1)' },
+                            { transform: 'scale(0.92)' },
+                            { transform: 'scale(1)' }
+                        ],
+                        { duration: 180, easing: 'ease-out' }
+                    );
+                });
+            });
+    </script>
+<!-- QR Code Library -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<script>
+const profileURL = window.location.href;
+
+/* QR CODE */
+const qrBtn = document.getElementById('qrBtn');
+const qrModal = document.getElementById('qrModal');
+
+qrBtn.addEventListener('click', () => {
+    qrModal.style.display = 'flex';
+    QRCode.toCanvas(
+        document.getElementById('qrCanvas'),
+        profileURL,
+        { width: 180 }
+    );
+});
+
+qrModal.addEventListener('click', () => {
+    qrModal.style.display = 'none';
+});
+
+/* SHARE */
+document.getElementById('shareBtn').addEventListener('click', async () => {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Digital Profile',
+            text: 'Check out this digital profile',
+            url: profileURL
+        });
+    } else {
+        await navigator.clipboard.writeText(profileURL);
+        alert('Profile link copied to clipboard');
+    }
+});
+
+/* ADD TO CONTACT */
+document.getElementById('contactBtn').addEventListener('click', () => {
+    const vCard = `
+BEGIN:VCARD
+VERSION:3.0
+N:Johnson;Kevin
+FN:Kevin Johnson
+ORG:Cool Co.
+TITLE:Marketing Manager
+TEL;TYPE=WORK:+911234567890
+EMAIL:kevin@coolco.com
+END:VCARD
+`.trim();
+
+    const blob = new Blob([vCard], { type: 'text/vcard' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'Kevin_Johnson.vcf';
+    link.click();
+});
+</script>
+
+
+</body>
+
+</html>
