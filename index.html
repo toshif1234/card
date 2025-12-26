@@ -251,6 +251,14 @@
     font-size: 13px;
 }
 
+        /* Snowfall Canvas */
+#snowCanvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none; /* Do not block clicks */
+    z-index: 998; /* Below modals, above UI */
+}
+
     </style>
 
 </head>
@@ -258,7 +266,7 @@
 <body>
 
     <div class="profile-container">
-
+<canvas id="snowCanvas"></canvas>
         <!-- Header -->
         <div class="header">
             <div class="header-content">
@@ -394,6 +402,66 @@ END:VCARD
     link.download = 'toshif.vcf';
     link.click();
 });
+
+    /* Snowfall Animation */
+const canvas = document.getElementById('snowCanvas');
+const ctx = canvas.getContext('2d');
+
+let w, h;
+function resizeCanvas() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+const snowflakes = [];
+const SNOW_COUNT = 120;
+
+for (let i = 0; i < SNOW_COUNT; i++) {
+    snowflakes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 2 + 1,
+        d: Math.random() * 1 + 0.5,
+        vx: Math.random() * 0.6 - 0.3
+    });
+}
+
+function drawSnow() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+    ctx.beginPath();
+
+    for (const f of snowflakes) {
+        ctx.moveTo(f.x, f.y);
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+    }
+
+    ctx.fill();
+    updateSnow();
+}
+
+function updateSnow() {
+    for (const f of snowflakes) {
+        f.y += f.d;
+        f.x += f.vx;
+
+        if (f.y > h) {
+            f.y = -5;
+            f.x = Math.random() * w;
+        }
+        if (f.x > w) f.x = 0;
+        if (f.x < 0) f.x = w;
+    }
+}
+
+function animateSnow() {
+    drawSnow();
+    requestAnimationFrame(animateSnow);
+}
+
+animateSnow();
 </script>
 
 
